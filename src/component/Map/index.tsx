@@ -8,6 +8,7 @@ import {
 import styled from 'styled-components';
 import { InnerMapProps, MapProps } from './types';
 
+// TODO: 定義場所を要検討
 const InnerMap = withScriptjs(
   withGoogleMap<InnerMapProps>((props) => {
     const { position } = props;

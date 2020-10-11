@@ -13,6 +13,7 @@ export const App = () => {
     lat: 0,
     lng: 0,
   });
+  // TODO: 型にErrorMessageTypesを定義したいが、errorStateがundefinedになる可能性があるため要検討
   const [errorState, setErrorState] = useState<string>('');
 
   /**
@@ -27,6 +28,7 @@ export const App = () => {
    * @desc submit押下時の挙動
    * @param {String} place - 住所
    */
+  // TODO: 別ファイルに定義したい
   const handlePlaceSubmit = (place: string) => {
     axios
       .get(GEOCODE_URL, { params: { address: place, key: API_KEY } })
