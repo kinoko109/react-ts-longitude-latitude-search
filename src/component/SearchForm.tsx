@@ -33,7 +33,7 @@ export const SearchForm: React.FC<SearchFormProps> = (props) => {
         value={address}
         onChange={(event) => handlePlace(event.target.value)}
       />
-      <InputSubmit value="検索" />
+      <InputSubmit value="検索" disabled={address === ''} />
     </form>
   );
 };
@@ -56,4 +56,9 @@ const InputSubmit = styled.input.attrs({
   height: 30px;
   margin-left: 20px;
   width: 100px;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.8;
+  }
 `;
