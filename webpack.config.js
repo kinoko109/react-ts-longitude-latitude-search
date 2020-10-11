@@ -1,4 +1,5 @@
 const Dotenv = require('dotenv-webpack');
+const path = require("path");
 
 module.exports = {
   mode: 'development',
@@ -26,4 +27,8 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.json'],
   },
+  devServer: {
+    contentBase: path.join(__dirname, "dist"),
+    lazy: false
+  }
 };
