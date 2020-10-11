@@ -1,0 +1,2 @@
+# どこからもimportされずエラーが起きるためignore
+/.eslintrc.js
