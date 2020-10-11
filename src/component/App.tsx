@@ -1,82 +1,89 @@
-import React, { Component } from "react";
+import React, {Component, useState} from "react";
 import styled from "styled-components";
 import axios from "axios";
 
 import { API_KEY, GEOCODE_URL, errorMessage } from "../const";
-import SearchForm from "./SearchForm";
-import GeocodeResult from "./GeocodeResult";
-import Map from "./Map";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      address: "",
-      errorMessage: "",
-      lat: 0,
-      lng: 0,
-    };
-  }
+import { GeocodeResult } from "./GeocodeResult";
+import { Map } from "./Map";
+import { SearchForm } from "./SearchForm";
+
+type AppTypes = {
+  address: string,
+  errorMessage: string,
+  lat: number,
+  lng: number,
+}
+
+export const App = () => {
+  const [appState, setAppState] = useState<AppTypes>({ address: "", errorMessage: "", lat: 0, lng: 0});
+  // const [error, setError] = useState();
 
   /**
    * @desc エラー用の結果表示
    * @param {String} errorMessage - エラーメッセージ
    */
-  showErrorMessage(errorMessage) {
-    this.setState({
+  const showErrorMessage = (errorMessage: string) => {
+    setAppState({
       address: "",
       errorMessage: errorMessage,
-      lat: "0",
-      lng: "0",
+      lat: 0,
+      lng: 0,
     });
   }
 
-  handlePlaceSubmit(place) {
+  /**
+   * @desc submit押下時の挙動
+   * @param {String} place - 住所
+   */
+  const handlePlaceSubmit = (place: string) => {
     axios
       .get(GEOCODE_URL, { params: { address: place, key: API_KEY } })
       // 成功時
       .then((response) => {
-        console.log(response);
         const { data } = response;
         const [resultData] = data.results;
+
         switch (data.status) {
           case "OK": {
             const location = resultData.geometry.location;
-            this.setState({
+
+            setAppState({
               address: resultData.formatted_address,
+              errorMessage: "",
               lat: location.lat,
               lng: location.lng,
             });
             break;
           }
           case "ZERO_RESULTS": {
-            this.showErrorMessage(errorMessage[0]);
+            showErrorMessage(errorMessage[0]);
             break;
           }
           default: {
-            this.showErrorMessage(errorMessage[1]);
+            showErrorMessage(errorMessage[1]);
           }
         }
       })
       .catch(() => {
-        this.showErrorMessage(errorMessage[2]);
+        showErrorMessage(errorMessage[2]);
       });
   }
 
-  render() {
     return (
       <Wrapper>
         <h1>緯度経度検索</h1>
-        <SearchForm handleSubmit={(place) => this.handlePlaceSubmit(place)} />
-        <GeocodeResult address={this.state.address || this.state.errorMessage} lat={this.state.lat} lng={this.state.lng} />
-        <Map lat={this.state.lat} lng={this.state.lng} />
+        <SearchForm onSubmit={(place) => handlePlaceSubmit(place)} />
+        <GeocodeResult
+          address={appState.address || appState.errorMessage}
+          lat={appState.lat}
+          lng={appState.lng}
+        />
+        <Map lat={appState.lat} lng={appState.lng} />
       </Wrapper>
     );
-  }
 }
 
 const Wrapper = styled.div`
   text-align: center;
 `;
-
-export default App;

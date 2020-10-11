@@ -1,34 +1,46 @@
-import React from 'react';
-import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
-import styled from 'styled-components';
+import React from "react";
+import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
+import styled from "styled-components";
 
-const InnerMap = withGoogleMap(({position, marker}) => (
-  <GoogleMap
-    defaultZoom={15}
-    defaultCenter={position}
-    center={position}
-  >
-    <Marker {...marker} />
-  </GoogleMap>
-));
-
-const Map = ({ lat, lng }) => {
-  const position = { lat,lng };
-
-  return(
-    <InnerMap 
-      containerElement={(<div />)}
-      mapElement={(<Wrapper />)}
-      // positionにはlat,lngのオブジェクトを渡す
-      position={position}
-      // markerにはpositionのママを渡すためオブジェクトの省略記法で{ positon }と書く
-      marker={{ position }}
-    />
-  )
+type InnerMapProps = {
+  position: {
+    lat: number;
+    lng: number;
+  };
 };
 
-const Wrapper = styled.div`
-  height: 400px;
-`
+const InnerMap = withGoogleMap<InnerMapProps>((props) => {
+  const { position } = props;
 
-export default Map;
+  return (
+    <GoogleMap defaultZoom={15} defaultCenter={position} center={position}>
+      <Marker position={position} />
+    </GoogleMap>
+  );
+});
+
+type MapProps = {
+  lat: number;
+  lng: number;
+};
+
+export const Map: React.FC<MapProps> = (props) => {
+  const { lat, lng } = props;
+
+  const position = { lat, lng };
+
+  return (
+    <InnerMap
+      containerElement={<Container />}
+      mapElement={<MapDiv />}
+      // positionにはlat,lngのオブジェクトを渡す
+      position={position}
+    />
+  );
+};
+
+const Container = styled.div``;
+
+const MapDiv = styled.div`
+  height: 400px;
+`;

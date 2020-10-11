@@ -1,44 +1,43 @@
-import React, { Component } from 'react';
+import React, { useState} from 'react';
 import styled from 'styled-components';
 
-export default class SearchForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      place: '東京',
-    }
-  }
+type SearchFormProps = {
+  onSubmit: (address: string) => void;
+}
+
+export const SearchForm: React.FC<SearchFormProps> = (props) => {
+  const {onSubmit} = props;
+
+  const [address, setAddress] = useState<string>("東京");
 
   /**
    * @desc 入力された文字列をstateにセット
    * @param {String} place - inputに入力される文字列
    */
-  handlePlace(place) {
-    this.setState({ place });
+  const handlePlace = (place: string) => {
+    setAddress(place);
   }
 
   /**
    * @desc submit時の制御
-   * @param {event object} event - イベントオブジェクト
+   * @param {event object} event - formイベントオブジェクト
    */
-  handleSubmit(event) {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    this.props.handleSubmit(this.state.place);
+    onSubmit(address);
   }
 
-  render() {
     return(
-      <form onSubmit={event => this.handleSubmit(event)}>
-        <InputText 
-          value={this.state.place}
-          onChange={event => this.handlePlace(event.target.value)}
+      <form onSubmit={event => handleSubmit(event)}>
+        <InputText
+          value={address}
+          onChange={event => handlePlace(event.target.value)}
         />
-        <InputSubmit 
+        <InputSubmit
           value="検索"
         />
       </form>
     );
-  }
 }
 
 const InputText = styled.input.attrs({
