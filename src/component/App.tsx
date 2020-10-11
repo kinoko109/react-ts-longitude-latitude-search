@@ -1,34 +1,26 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-
 import { API_KEY, GEOCODE_URL, errorMessage } from '../const';
-
+import { AppStateTypes } from './types';
 import { Map } from './Map';
 import { SearchForm } from './SearchForm';
 import { GeocodeResult } from './GeocodeResult';
-import { AppStateTypes } from './types';
 
 export const App = () => {
   const [appState, setAppState] = useState<AppStateTypes>({
     address: '',
-    errorMessage: '',
     lat: 0,
     lng: 0,
   });
-  // const [error, setError] = useState();
+  const [errorState, setErrorState] = useState<string>('');
 
   /**
    * @desc エラー用の結果表示
    * @param {String} errorText - エラーメッセージ
    */
   const showErrorMessage = (errorText: string) => {
-    setAppState({
-      address: '',
-      errorMessage: errorText,
-      lat: 0,
-      lng: 0,
-    });
+    setErrorState(errorText);
   };
 
   /**
@@ -49,7 +41,6 @@ export const App = () => {
 
             setAppState({
               address: resultData.formatted_address,
-              errorMessage: '',
               lat: location.lat,
               lng: location.lng,
             });
@@ -74,7 +65,7 @@ export const App = () => {
       <h1>緯度経度検索</h1>
       <SearchForm onSubmit={(place) => handlePlaceSubmit(place)} />
       <GeocodeResult
-        address={appState.address || appState.errorMessage}
+        address={appState.address || errorState}
         lat={appState.lat}
         lng={appState.lng}
       />
