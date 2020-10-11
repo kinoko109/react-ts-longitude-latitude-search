@@ -1,7 +1,7 @@
 module.exports = {
   mode: 'development',
   // エントリーポイント
-  entry: './src/index.tsx',
+  entry: './src/index.jsx',
   // 出力設定
   output: {
     // ディレクトリ名
