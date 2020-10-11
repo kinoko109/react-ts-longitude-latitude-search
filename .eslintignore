@@ -1,2 +1,3 @@
 # どこからもimportされずエラーが起きるためignore
 /.eslintrc.js
+/webpack.config.js
