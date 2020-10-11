@@ -6,13 +6,7 @@ import {
   withScriptjs,
 } from 'react-google-maps';
 import styled from 'styled-components';
-
-type InnerMapProps = {
-  position: {
-    lat: number;
-    lng: number;
-  };
-};
+import { InnerMapProps, MapProps } from './types';
 
 const InnerMap = withScriptjs(
   withGoogleMap<InnerMapProps>((props) => {
@@ -25,11 +19,6 @@ const InnerMap = withScriptjs(
     );
   }),
 );
-
-type MapProps = {
-  lat: number;
-  lng: number;
-};
 
 export const Map: React.FC<MapProps> = (props) => {
   const { lat, lng } = props;

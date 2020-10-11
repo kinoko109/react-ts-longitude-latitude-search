@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-
-type SearchFormProps = {
-  onSubmit: (address: string) => void;
-};
+import { SearchFormProps } from './types';
 
 export const SearchForm: React.FC<SearchFormProps> = (props) => {
   const { onSubmit } = props;

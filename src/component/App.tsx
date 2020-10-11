@@ -7,16 +7,10 @@ import { API_KEY, GEOCODE_URL, errorMessage } from '../const';
 import { Map } from './Map';
 import { SearchForm } from './SearchForm';
 import { GeocodeResult } from './GeocodeResult';
-
-type AppTypes = {
-  address: string;
-  errorMessage: string;
-  lat: number;
-  lng: number;
-};
+import { AppStateTypes } from './types';
 
 export const App = () => {
-  const [appState, setAppState] = useState<AppTypes>({
+  const [appState, setAppState] = useState<AppStateTypes>({
     address: '',
     errorMessage: '',
     lat: 0,

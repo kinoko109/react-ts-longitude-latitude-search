@@ -1,11 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
-type GeocodeResultProps = {
-  address: string;
-  lat: number;
-  lng: number;
-};
+import { GeocodeResultProps } from './types';
 
 export const GeocodeResult: React.FC<GeocodeResultProps> = (props) => {
   const { address, lat, lng } = props;
