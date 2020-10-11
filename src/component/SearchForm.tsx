@@ -1,14 +1,14 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 type SearchFormProps = {
   onSubmit: (address: string) => void;
-}
+};
 
 export const SearchForm: React.FC<SearchFormProps> = (props) => {
-  const {onSubmit} = props;
+  const { onSubmit } = props;
 
-  const [address, setAddress] = useState<string>("東京");
+  const [address, setAddress] = useState<string>('東京');
 
   /**
    * @desc 入力された文字列をstateにセット
@@ -16,7 +16,7 @@ export const SearchForm: React.FC<SearchFormProps> = (props) => {
    */
   const handlePlace = (place: string) => {
     setAddress(place);
-  }
+  };
 
   /**
    * @desc submit時の制御
@@ -25,20 +25,18 @@ export const SearchForm: React.FC<SearchFormProps> = (props) => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     onSubmit(address);
-  }
+  };
 
-    return(
-      <form onSubmit={event => handleSubmit(event)}>
-        <InputText
-          value={address}
-          onChange={event => handlePlace(event.target.value)}
-        />
-        <InputSubmit
-          value="検索"
-        />
-      </form>
-    );
-}
+  return (
+    <form onSubmit={(event) => handleSubmit(event)}>
+      <InputText
+        value={address}
+        onChange={(event) => handlePlace(event.target.value)}
+      />
+      <InputSubmit value="検索" />
+    </form>
+  );
+};
 
 const InputText = styled.input.attrs({
   type: 'text',

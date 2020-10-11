@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 type GeocodeResultProps = {
   address: string;
@@ -12,9 +12,18 @@ export const GeocodeResult: React.FC<GeocodeResultProps> = (props) => {
 
   return (
     <List>
-      <Item>住所：{address}</Item>
-      <Item>緯度{lat}</Item>
-      <Item>軽度{lng}</Item>
+      <Item>
+        住所：
+        {address}
+      </Item>
+      <Item>
+        緯度
+        {lat}
+      </Item>
+      <Item>
+        軽度
+        {lng}
+      </Item>
     </List>
   );
 };

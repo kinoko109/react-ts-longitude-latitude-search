@@ -1,7 +1,9 @@
+const Dotenv = require('dotenv-webpack');
+
 module.exports = {
   mode: 'development',
   // エントリーポイント
-  entry: './src/index.jsx',
+  entry: './src/index.tsx',
   // 出力設定
   output: {
     // ディレクトリ名
@@ -9,6 +11,7 @@ module.exports = {
     // ファイル名
     filename: 'main.js',
   },
+  plugins: [new Dotenv({ systemvars: true })],
   module: {
     rules: [
       {
