@@ -7,4 +7,5 @@ export const errorMessage = {
   0: '結果がありません。',
   1: 'エラーが発生しました。',
   2: '通信エラー...',
-};
+  // eslint-disable-next-line no-undef
+} as const;

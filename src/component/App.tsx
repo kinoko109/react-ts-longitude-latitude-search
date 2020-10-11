@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { API_KEY, GEOCODE_URL, errorMessage } from '../const';
-import { AppStateTypes } from './types';
+import { AppStateTypes, ErrorMessageTypes } from './types';
 import { Map } from './Map';
 import { SearchForm } from './SearchForm';
 import { GeocodeResult } from './GeocodeResult';
@@ -19,7 +19,7 @@ export const App = () => {
    * @desc エラー用の結果表示
    * @param {String} errorText - エラーメッセージ
    */
-  const showErrorMessage = (errorText: string) => {
+  const showErrorMessage = (errorText: ErrorMessageTypes) => {
     setErrorState(errorText);
   };
 
