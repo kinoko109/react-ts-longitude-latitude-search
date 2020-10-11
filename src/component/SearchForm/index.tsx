@@ -8,7 +8,7 @@ type SearchFormProps = {
 export const SearchForm: React.FC<SearchFormProps> = (props) => {
   const { onSubmit } = props;
 
-  const [address, setAddress] = useState<string>('東京');
+  const [address, setAddress] = useState<string>('');
 
   /**
    * @desc 入力された文字列をstateにセット

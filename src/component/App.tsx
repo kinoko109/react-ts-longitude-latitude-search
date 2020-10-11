@@ -4,9 +4,9 @@ import axios from 'axios';
 
 import { API_KEY, GEOCODE_URL, errorMessage } from '../const';
 
-import { GeocodeResult } from './GeocodeResult';
 import { Map } from './Map';
 import { SearchForm } from './SearchForm';
+import { GeocodeResult } from './GeocodeResult';
 
 type AppTypes = {
   address: string;
