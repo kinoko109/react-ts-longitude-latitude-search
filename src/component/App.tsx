@@ -6,6 +6,7 @@ import { AppStateTypes, ErrorMessageTypes } from './types';
 import { Map } from './Map';
 import { SearchForm } from './SearchForm';
 import { GeocodeResult } from './GeocodeResult';
+import { HotelTable } from './HotelTable';
 
 export const App = () => {
   const [appState, setAppState] = useState<AppStateTypes>({
@@ -15,6 +16,22 @@ export const App = () => {
       lng: 0,
     },
   });
+
+  const [hotels, setHotels] = useState([
+    {
+      id: 1,
+      name: 'hoge',
+      url: 'https://www.google.com/',
+    },
+    {
+      id: 2,
+      name: 'fuga',
+      url: 'https://www.google.com/',
+    },
+  ]);
+
+  console.log(setHotels([]));
+
   // TODO: 型にErrorMessageTypesを定義したいが、errorStateがundefinedになる可能性があるため要検討
   const [errorState, setErrorState] = useState<string>('');
 
@@ -76,6 +93,7 @@ export const App = () => {
             address={appState.address || errorState}
             location={appState.location}
           />
+          <HotelTable hotels={hotels} />
         </GeocodeResultArea>
       </FlexDiv>
     </Wrapper>
@@ -95,5 +113,6 @@ const MapArea = styled.div`
 `;
 
 const GeocodeResultArea = styled(FlexDiv)`
+  flex-direction: column;
   width: 50%;
 `;
