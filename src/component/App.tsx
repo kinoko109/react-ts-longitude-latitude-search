@@ -65,17 +65,35 @@ export const App = () => {
 
   return (
     <Wrapper>
-      <h1>緯度経度検索</h1>
+      <h1>ホテル検索</h1>
       <SearchForm onSubmit={(place) => handlePlaceSubmit(place)} />
-      <GeocodeResult
-        address={appState.address || errorState}
-        location={appState.location}
-      />
-      <Map position={appState.location} />
+      <FlexDiv>
+        <MapArea>
+          <Map position={appState.location} />
+        </MapArea>
+        <GeocodeResultArea>
+          <GeocodeResult
+            address={appState.address || errorState}
+            location={appState.location}
+          />
+        </GeocodeResultArea>
+      </FlexDiv>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
   text-align: center;
+`;
+
+const FlexDiv = styled.div`
+  display: flex;
+`;
+
+const MapArea = styled.div`
+  width: 50%;
+`;
+
+const GeocodeResultArea = styled(FlexDiv)`
+  width: 50%;
 `;

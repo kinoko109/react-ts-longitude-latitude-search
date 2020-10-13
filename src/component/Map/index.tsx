@@ -39,5 +39,5 @@ export const Map: React.FC<MapProps> = (props) => {
 const Container = styled.div``;
 
 const MapDiv = styled.div`
-  height: 400px;
+  height: 600px;
 `;

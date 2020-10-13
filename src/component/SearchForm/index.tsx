@@ -25,15 +25,19 @@ export const SearchForm: React.FC<SearchFormProps> = (props) => {
   };
 
   return (
-    <form onSubmit={(event) => handleSubmit(event)}>
+    <Form onSubmit={(event) => handleSubmit(event)}>
       <InputText
         value={address}
         onChange={(event) => handlePlace(event.target.value)}
       />
       <InputSubmit value="検索" disabled={address === ''} />
-    </form>
+    </Form>
   );
 };
+
+const Form = styled.form`
+  margin-bottom: 30px;
+`;
 
 const InputText = styled.input.attrs({
   type: 'text',
