@@ -10,8 +10,10 @@ import { GeocodeResult } from './GeocodeResult';
 export const App = () => {
   const [appState, setAppState] = useState<AppStateTypes>({
     address: '',
-    lat: 0,
-    lng: 0,
+    location: {
+      lat: 0,
+      lng: 0,
+    },
   });
   // TODO: 型にErrorMessageTypesを定義したいが、errorStateがundefinedになる可能性があるため要検討
   const [errorState, setErrorState] = useState<string>('');
@@ -43,8 +45,7 @@ export const App = () => {
 
             setAppState({
               address: resultData.formatted_address,
-              lat: location.lat,
-              lng: location.lng,
+              location,
             });
             break;
           }
@@ -68,10 +69,9 @@ export const App = () => {
       <SearchForm onSubmit={(place) => handlePlaceSubmit(place)} />
       <GeocodeResult
         address={appState.address || errorState}
-        lat={appState.lat}
-        lng={appState.lng}
+        location={appState.location}
       />
-      <Map lat={appState.lat} lng={appState.lng} />
+      <Map position={appState.location} />
     </Wrapper>
   );
 };

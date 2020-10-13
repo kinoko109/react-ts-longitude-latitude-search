@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { GeocodeResultProps } from './types';
+import { AppStateTypes } from '../types';
 
-export const GeocodeResult: React.FC<GeocodeResultProps> = (props) => {
-  const { address, lat, lng } = props;
+export const GeocodeResult: React.FC<AppStateTypes> = (props) => {
+  const { address, location } = props;
 
   return (
     <List>
@@ -13,11 +13,11 @@ export const GeocodeResult: React.FC<GeocodeResultProps> = (props) => {
       </Item>
       <Item>
         緯度
-        {lat}
+        {location.lat}
       </Item>
       <Item>
         軽度
-        {lng}
+        {location.lng}
       </Item>
     </List>
   );
